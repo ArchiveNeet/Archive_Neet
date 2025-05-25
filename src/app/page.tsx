@@ -5,14 +5,9 @@ import { Separator } from "@/components/ui/separator";
 import { FaYoutube } from "react-icons/fa";
 import { CiShoppingBasket } from "react-icons/ci";
 import Link from "next/link";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
 
-} from "@/components/ui/carousel"
 import { RiTwitterXLine } from "react-icons/ri";
-import Posts from "@/components/Posts";
+// import Posts from "@/components/Posts";
 export default function Page() {
 
   return (
