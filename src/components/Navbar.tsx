@@ -1,14 +1,5 @@
 import Image from "next/image"
 import Logo from "~/Logo.svg"
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from "@/components/ui/sheet"
-import { CiShoppingCart } from "react-icons/ci";
 import Link from "next/link";
 export default function Navbar() {
     return (
@@ -20,20 +11,6 @@ export default function Navbar() {
             </Link>
 
 
-            <Sheet>
-                <SheetTrigger>
-                    <CiShoppingCart className="size-12  text-accent-foreground " />
-                </SheetTrigger>
-                <SheetContent>
-                    <SheetHeader>
-                        <SheetTitle>Are you absolutely sure?</SheetTitle>
-                        <SheetDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
-                        </SheetDescription>
-                    </SheetHeader>
-                </SheetContent>
-            </Sheet>
 
         </div>
     )
