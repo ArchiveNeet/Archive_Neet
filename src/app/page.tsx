@@ -1,126 +1,69 @@
-import { Skeleton } from "@/components/ui/skeleton"
+
+import Logo from "~/Logo.svg";
 import Image from "next/image";
-import { db } from "@/db/index";
-import { ProductType, HomeImgs, ProductTable } from "@/db/schema"; // Adjust path to your schema
-import { eq } from "drizzle-orm";
+import { Separator } from "@/components/ui/separator";
+import { FaYoutube } from "react-icons/fa";
+import { CiShoppingBasket } from "react-icons/ci";
 import Link from "next/link";
-interface CategoryWithImages {
-  id: number;
-  name: string;
-  homeImages: Array<{
-    id: number;
-    name: string;
-    img_url: string;
-  }>;
-}
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
 
-async function getCategoriesWithImages(): Promise<CategoryWithImages[]> {
-  try {
-    // First get all product types
-    const productTypes = await db.select().from(ProductType);
-    
-    // Then get home images for each product type
-    const categoriesWithImages = await Promise.all(
-      productTypes.map(async (category) => {
-        const homeImages = await db
-          .select()
-          .from(HomeImgs)
-          .where(eq(HomeImgs.product_type_id, category.id));
-        
-        return {
-          id: category.id,
-          name: category.name,
-          homeImages: homeImages,
-        };
-      })
-    );
-    
-    return categoriesWithImages;
-  } catch (error) {
-    console.error("Error fetching categories:", error);
-    return [];
-  }
-}
+} from "@/components/ui/carousel"
+import { RiTwitterXLine } from "react-icons/ri";
+import Posts from "@/components/Posts";
+export default function Page() {
 
-function ProductSkeleton() {
   return (
-    <div className="rounded-lg p-4 space-y-3">
-      <Skeleton className="w-full h-48 rounded-lg" />
+    <main className="w-full min-h-full flex flex-col items-center justify-center px-4 space-y-6 overflow-hidden">
+      {/* Centered Logo */}
+      <Image src={Logo} alt="logo" />
 
-    </div>
-  );
-}
-
-function CategorySkeleton() {
-  return (
-    <div className="space-y-4">
-      <Skeleton className="h-10 w-48" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <ProductSkeleton key={index} />
-        ))}
+      {/* Social Icons with vertical separators */}
+      <div className="flex items-center space-x-4">
+        <Link href="/catalog">
+          <CiShoppingBasket className="size-6 hover:text-green-400" />
+        </Link>
+        <Separator orientation="vertical" className="h-6" />
+        <Link href="https://www.youtube.com/@ArchiveNeet">
+          <FaYoutube className="size-6 hover:text-red-600" />
+        </Link>
+        <Separator orientation="vertical" className="h-6" />
+        <Link href="https://x.com/ArchiveNeet">
+          <RiTwitterXLine className="size-6 hover:text-gray-600" />
+        </Link>
       </div>
-    </div>
-  );
-}
 
-export default async function Home() {
-  const categories = await getCategoriesWithImages();
+      {/* <section className="w-full h-full flex flex-col items-center justify-center " id="content">
+        <div className="max-w-7xl md:w-full h-full flex flex-col gap-6">
+          <h1 className="text-2xl font-bold ">Seasonal Collections</h1>
+          <Carousel>
+            <CarouselContent className="-ml-4">
+             <CarouselItem className="min-w-sm md:max-w-md max-w-sm md:min-w-md">
+                <Posts
+                  name="Winter Collection"
+                  image_url="/Logo.svg"
 
-  if (!categories || categories.length === 0) {
-    return (
-      <main className="w-full min-h-screen p-6">
-        <div className="max-w-6xl mx-auto space-y-8">
-          {Array.from({ length: 4 }).map((_, index) => (
-            <CategorySkeleton key={index} />
-          ))}
+                />
+              </CarouselItem> 
+             
+            </CarouselContent>
+          </Carousel>
+          <h1 className="text-2xl font-bold ">Projects</h1>
+          <Carousel className="w-full">
+            <CarouselContent className="-ml-4">
+              
+            </CarouselContent>
+          </Carousel>
+          <h1 className="text-2xl font-bold">Blog posts</h1>
+          <Carousel>
+            <CarouselContent className="-ml-4">
+              
+            </CarouselContent>
+          </Carousel>
         </div>
-      </main>
-    );
-  }
-
-  return (
-    <main className="w-full min-h-screen p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
-        {categories.map((category) => (
-          <div key={category.id} className="space-y-4">
-            {/* Category Title */}
-<Link href={"/category/"+category.name}>            
-            
-            <h2 className="text-4xl font-medium">
-              {category.name}
-            </h2>
-            </Link>
-            
-            {/* Product Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {category.homeImages && category.homeImages.length > 0 ? (
-                category.homeImages.map((image) => (
-                  <div key={image.id} className=" p-4 space-y-3 ">
-                    {/* Product Image */}
-                    <div className="relative w-full h-48 overflow-hidden rounded-lg">
-                      <Image 
-                        src={image.img_url} 
-                        alt={image.name}
-                        
-                 height={150}
-                 width={150}
-                 className=""
-                      />
-                    </div>
-                
-                  </div>
-                ))
-              ) : (
-                // Show placeholder if no images
-                <div className="col-span-full text-center py-8 text-gray-500">
-                  No images available for {category.name}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      </section> */}
     </main>
   );
 }
