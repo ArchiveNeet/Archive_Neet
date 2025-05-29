@@ -43,9 +43,9 @@ export default function Page() {
             </Badge>
 
             <ul className=" text-sm md:text-base space-y-2">
-              <li>• BW: 220 lb → 190 lb</li>
-              <li>• Ship 1 Project</li>
-              <li>• publish 3 long blog post</li>
+              <li className="hover:text-purple-200">• BW: 220 lb → 190 lb</li>
+              <li className="hover:text-purple-200">• Ship 1 Project</li>
+              <li className="hover:text-purple-200">• publish 3 long blog post</li>
             </ul>
           </div>
 

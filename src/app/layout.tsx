@@ -39,7 +39,7 @@ export default function RootLayout({
             <Navbar/>
           </div>
           {children}
-          <div className="w-full h-fit mt-10">
+          <div className="w-full h-fit mt-10  bottom-0 z-10">
             <Footer />
           </div>
         </ThemeProvider>

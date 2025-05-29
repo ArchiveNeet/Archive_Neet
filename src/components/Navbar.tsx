@@ -30,13 +30,13 @@ export default function Navbar() {
         
         {/* Center - Navigation links */}
         <div className="flex items-center gap-6 text-lg">
-          <Link href={"/catalog"} className="hover:text-purple-100 text-stone-600">
+          <Link href={"/Works"} className="hover:text-purple-100 text-stone-600">
             Works
           </Link>
-          <Link href={"/blog"} className="hover:text-purple-100 text-stone-600">
+          <Link href={"/Blog"} className="hover:text-purple-100 text-stone-600">
             Blog
           </Link>
-          <Link href={"/projects"} className="hover:text-purple-100 text-stone-600">
+          <Link href={"/Catalog"} className="hover:text-purple-100 text-stone-600">
             Catalog
           </Link>
         </div>
