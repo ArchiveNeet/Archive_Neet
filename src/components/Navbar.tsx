@@ -1,9 +1,9 @@
 import Image from "next/image"
 import Logo from "~/icon.png"
 import Link from "next/link";
-import { FaXTwitter } from "react-icons/fa6";
 import { FaYoutube } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { BsSubstack } from "react-icons/bs";
 import { Menu } from "lucide-react";
 import {
   DropdownMenu,
@@ -27,7 +27,7 @@ export default function Navbar() {
             Archive_Neet
           </Link>
         </div>
-        
+
         {/* Center - Navigation links */}
         <div className="flex items-center gap-6 text-lg">
           <Link href={"/Works"} className="hover:text-purple-100 text-stone-600">
@@ -36,17 +36,15 @@ export default function Navbar() {
           <Link href={"https://substack.com/@archiveneet/posts"} className="hover:text-purple-100 text-stone-600">
             Blog
           </Link>
-          <Link href={"/Catalog"} className="hover:text-purple-100 text-stone-600">
-            Catalog
-          </Link>
+
         </div>
-        
+
         {/* Right side - Social icons */}
         <div className="flex items-center gap-4 text-lg">
-          <Link href="https://x.com/ArchiveNeet" className="hover:text-purple-100 text-stone-600">
-            <FaXTwitter className="size-6" />
+          <Link href="https://substack.com/@archiveneet/posts" className="hover:text-purple-100 text-stone-600">
+            <BsSubstack className="size-6" />
           </Link>
-          <Link href="https://github.com/yourusername" className="hover:text-purple-100 text-stone-600">
+          <Link href="https://github.com/ArchiveNeet" className="hover:text-purple-100 text-stone-600">
             <FaGithub className="size-6" />
           </Link>
           <Link href="https://www.youtube.com/@ArchiveNeet" className="hover:text-purple-100 text-stone-600">
@@ -85,23 +83,19 @@ export default function Navbar() {
                 Blog
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/projects" className="w-full">
-                Catalog
-              </Link>
-            </DropdownMenuItem>
-            
+     
+
             <DropdownMenuSeparator />
-            
+
             {/* Social Links */}
             <DropdownMenuItem asChild>
-              <Link href="https://x.com/ArchiveNeet" className="w-full flex items-center gap-2">
-                <FaXTwitter className="size-4" />
-                Twitter/X
+              <Link href="https://substack.com/@archiveneet/posts" className="w-full flex items-center gap-2">
+                <BsSubstack className="size-6" />
+                Substack
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="https://github.com/yourusername" className="w-full flex items-center gap-2">
+              <Link href="https://github.com/ArchiveNeet" className="w-full flex items-center gap-2">
                 <FaGithub className="size-4" />
                 GitHub
               </Link>
