@@ -4,8 +4,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+
 } from "@/components/ui/carousel"
 
 export default function page() {
@@ -17,46 +16,18 @@ export default function page() {
       link: "/",
       description: "Personal portfolio and blog platform"
     },
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "Project Alpha",
-      link: "/alpha",
-      description: "Next.js application with modern features"
-    },
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "Project Beta",
-      link: "/beta",
-      description: "React-based dashboard solution"
-    }
+  
   ];
 
   // Sample past projects data
   const pastProjects = [
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "Legacy System",
-      link: "/legacy",
-      description: "Completed web application from 2024"
-    },
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "Mobile App",
-      link: "/mobile",
-      description: "React Native mobile application"
-    },
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "E-commerce Site",
-      link: "/ecommerce",
-      description: "Full-stack shopping platform"
-    },
-    {
-      image_url: "https://imgur.com/sZwU1Rm.png",
-      name: "Data Viz Tool",
-      link: "/dataviz",
-      description: "Interactive data visualization dashboard"
-    }
+    // {
+    //   image_url: "https://imgur.com/sZwU1Rm.png",
+    //   name: "Legacy System",
+    //   link: "/legacy",
+    //   description: "Completed web application from 2024"
+    // },
+
   ];
 
   return (
@@ -84,8 +55,7 @@ export default function page() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-12" />
-          <CarouselNext className="hidden md:flex -right-12" />
+
         </Carousel>
       </div>
 
@@ -97,7 +67,7 @@ export default function page() {
 
         
         <Carousel className="w-full">
-          <CarouselContent className="-ml-2 md:-ml-4">
+          {/* <CarouselContent className="-ml-2 md:-ml-4">
             {pastProjects.map((project, index) => (
               <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                 <div className="flex justify-center">
@@ -110,9 +80,8 @@ export default function page() {
                 </div>
               </CarouselItem>
             ))}
-          </CarouselContent>
-          <CarouselPrevious className="hidden md:flex -left-12" />
-          <CarouselNext className="hidden md:flex -right-12" />
+          </CarouselContent> */}
+
         </Carousel>
       </div>
 

@@ -19,7 +19,7 @@ export default function Page() {
 
           {/* Hero Text */}
           <Badge variant="secondary" className="bg-blue-800/50 text-blue-200 hover:bg-blue-800/70">
-            Hello, just living through interesting times
+            Hello, just living through interesting times...
           </Badge>
 
           {/* About Me Section */}
@@ -34,6 +34,7 @@ export default function Page() {
               nth degree. I want to be more genuine in my interests and hobbies. I hate eternal irony 
               that is prevalent in many places on the internet.
             </p>
+
           </div>
 
           {/* Goals Section */}

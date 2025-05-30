@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-serif min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-serif min-h-screen  bg-background`}
       >
         <ThemeProvider
           attribute="class"
@@ -36,9 +36,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="w-full h-fit sticky top-0 z-10">
-            <Navbar/>
+            <Navbar />
           </div>
-          {children}
+
+            {children}
+
           <div className="w-full h-fit mt-10  bottom-0 z-10">
             <Footer />
           </div>

@@ -33,7 +33,7 @@ export default function Navbar() {
           <Link href={"/Works"} className="hover:text-purple-100 text-stone-600">
             Works
           </Link>
-          <Link href={"/Blog"} className="hover:text-purple-100 text-stone-600">
+          <Link href={"https://substack.com/@archiveneet/posts"} className="hover:text-purple-100 text-stone-600">
             Blog
           </Link>
           <Link href={"/Catalog"} className="hover:text-purple-100 text-stone-600">
@@ -81,7 +81,7 @@ export default function Navbar() {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/blog" className="w-full">
+              <Link href="https://substack.com/@archiveneet/posts" className="w-full">
                 Blog
               </Link>
             </DropdownMenuItem>
