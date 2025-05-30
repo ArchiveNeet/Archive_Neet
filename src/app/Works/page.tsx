@@ -20,15 +20,15 @@ export default function page() {
   ];
 
   // Sample past projects data
-  const pastProjects = [
-    // {
-    //   image_url: "https://imgur.com/sZwU1Rm.png",
-    //   name: "Legacy System",
-    //   link: "/legacy",
-    //   description: "Completed web application from 2024"
-    // },
+  // const pastProjects = [
+  //   {
+  //     image_url: "https://imgur.com/sZwU1Rm.png",
+  //     name: "Legacy System",
+  //     link: "/legacy",
+  //     description: "Completed web application from 2024"
+  //   },
 
-  ];
+  // ];
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center justify-start py-8 px-4 space-y-12">
