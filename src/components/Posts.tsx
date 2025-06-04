@@ -10,14 +10,14 @@ interface ProductProps {
 export default function Products({ name, image_url, description = "Short description that will be very brief", link }: ProductProps) {
   return (
     <Link href={link}>
-      <div className="cursor-pointer rounded-lg w-72 flex flex-col   transition-shadow">
+      <div className="cursor-pointer  w-72 flex flex-col   transition-shadow">
         {/* Image Container */}
         <div className="relative w-full h-48 ">
           <Image
             src={image_url}
             alt={name}
             fill
-            className="object-cover"
+            className="object-cover  border border-1 border-purple-100 rounded-lg"
           />
         </div>
 

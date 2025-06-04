@@ -11,12 +11,17 @@ export default function page() {
   // Sample current projects data
   const currentProjects = [
     {
-      image_url: "https://imgur.com/sZwU1Rm.png",
+      image_url: "https://i.imgur.com/oQXS0SK.png",
       name: "Archive Neet",
       link: "/",
       description: "Personal portfolio and blog platform"
     },
-  
+      {
+      image_url: "https://i.imgur.com/ovtxpRy.png",
+      name: "CPP Book practice",
+      link: "https://github.com/ArchiveNeet/CPP-Book",
+      description: "Learning C++ for future projects"
+    },
   ];
 
   // Sample past projects data
