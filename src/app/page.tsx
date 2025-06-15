@@ -1,59 +1,103 @@
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-export default function Page() {
 
+export default function Home() {
   return (
-    <main className="w-full min-h-full flex flex-col items-center justify-center px-4 space-y-6 overflow-hidden">
-      <div className="flex flex-col items-center justify-center px-4 py-8 md:py-16">
-        <div className="max-w-md md:max-w-lg w-full text-center space-y-6">
-          {/* Hero Image */}
-          <div className="relative w-full aspect-square max-w-sm mx-auto">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <Image
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
+          priority
+        />
+        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
+          <li className="mb-2 tracking-[-.01em]">
+            Get started by editing{" "}
+            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
+              src/app/page.tsx
+            </code>
+            .
+          </li>
+          <li className="tracking-[-.01em]">
+            Save and see your changes instantly.
+          </li>
+        </ol>
+
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          <a
+            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
+            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
-              src="https://i.imgur.com/6Zem1Ew.png" // Replace with your actual image URL
-              alt="Retro computer setup"
-              fill
-              className="object-cover rounded-lg"
-              priority
+              className="dark:invert"
+              src="/vercel.svg"
+              alt="Vercel logomark"
+              width={20}
+              height={20}
             />
-          </div>
-
-          {/* Hero Text */}
-          <Badge variant="secondary" className="bg-blue-800/50 text-blue-200 hover:bg-blue-800/70">
-            Hello, just living through interesting times...
-          </Badge>
-
-          {/* About Me Section */}
-          <div className="text-left space-y-4">
-            <Badge variant="secondary" className="bg-red-800/50 text-red-200 hover:bg-red-800/70">
-              About Me
-            </Badge>
-
-            <p className="text-sm md:text-base leading-relaxed">
-              Hello, the goal for this site is to allow me to jot down my thoughts, ideas, and show 
-              off projects that I am working on. Somethings to know about me; I am mind rotted to the 
-              nth degree. I want to be more genuine in my interests and hobbies. I hate eternal irony 
-              that is prevalent in many places on the internet.
-            </p>
-
-          </div>
-
-          {/* Goals Section */}
-          <div className="text-left space-y-4">
-            <Badge variant="secondary" className="bg-amber-800/50 text-amber-200 hover:bg-amber-800/70">
-              Goals 2025
-            </Badge>
-
-            <ul className=" text-sm md:text-base space-y-2">
-              <li className="hover:text-purple-200">• BW: 220 lb → 190 lb</li>
-              <li className="hover:text-purple-200">• Ship 1 Project</li>
-              <li className="hover:text-purple-200">• publish 3 long blog post</li>
-            </ul>
-          </div>
-
+            Deploy now
+          </a>
+          <a
+            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
+            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read our docs
+          </a>
         </div>
-      </div>
-
-
-    </main>
+      </main>
+      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/file.svg"
+            alt="File icon"
+            width={16}
+            height={16}
+          />
+          Learn
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/window.svg"
+            alt="Window icon"
+            width={16}
+            height={16}
+          />
+          Examples
+        </a>
+        <a
+          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Image
+            aria-hidden
+            src="/globe.svg"
+            alt="Globe icon"
+            width={16}
+            height={16}
+          />
+          Go to nextjs.org →
+        </a>
+      </footer>
+    </div>
   );
 }
