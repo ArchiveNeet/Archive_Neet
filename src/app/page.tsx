@@ -1,25 +1,35 @@
-import { createFileRoute } from '@tanstack/react-router'
-import '../App.css'
+import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import Favicon from "~/Favico.svg"
-import { SiSubstack } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa";
+import { SiSubstack } from "react-icons/si";
 import { FaYoutube } from "react-icons/fa6";
-import { Link } from '@tanstack/react-router';
+import { FaGithub } from "react-icons/fa";
+import Favicon from "~/icon.svg"
+//github repos
+const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos')
+const repos = await githubRepo.json()
 
-export const Route = createFileRoute('/')({
-  component: App,
+//substack posts
+const substackPosts = await fetch('https://api.substackapi.dev/posts/latest?publication_url=archiveneet.substack.com', {
+  headers: {
+    'X-API-Key': process.env.SUBSTACK_API_KEY,
+  }
 })
+const SubstackPosts = await substackPosts.json()
 
-function App() {
+
+//youtube videos
+const youtubeVideos = await fetch('https://www.googleapis.com/youtube/v3/search?key=' + process.env.YOUTUBE_API_KEY + '&channelId=UC35viV3Agj-YLT15IPrrVFg&part=snippet,id&order=date&maxResults=20')
+const YoutubeVideos = await youtubeVideos.json()
+console.log(YoutubeVideos)
+export default function page() {
   return (
     <main className='w-full h-full flex flex-col items-center px-4'>
       <div className='w-full max-w-4xl'>
         <section className='w-full' id='header'>
           {/* Mobile layout - stacked */}
           <div className='flex flex-col items-center gap-6 md:hidden'>
-            <img src={Favicon} alt="Icon" className='w-32 h-32 object-contain' />
+            <Image src={Favicon} alt="Icon" className='w-32 h-32 object-contain' />
             <div className='flex flex-col items-center text-center space-y-4'>
               <div>
                 <h1 className='text-4xl font-bold text-purple-200'>Archive NEET</h1>
@@ -27,7 +37,6 @@ function App() {
                   Interests include Software, Hardware, and misc topics.
                 </p>
               </div>
-
               <div className='flex flex-row items-center gap-4 text-2xl'>
                 <a href='https://x.com/ArchiveNeet'>
                   <FaXTwitter className='hover:text-purple-300 transition-colors' />
@@ -46,16 +55,18 @@ function App() {
               <p className='text-lg text-center leading-relaxed'>
                 Hello, the goal for this site is to allow me to jot down my thoughts, ideas, and show off projects that I am working on.
               </p>
+
+
             </div>
           </div>
 
           {/* Desktop layout - side by side */}
           <div className='hidden md:flex md:items-center md:gap-8'>
             <div className='flex-shrink-0'>
-              <img src={Favicon} alt="Icon" className=' object-contain' />
+              <Image src={Favicon} alt="Icon" className='' />
             </div>
 
-            <div className='flex flex-col items-start space-y-6 flex-1'>
+            <div className='flex flex-col items-start space-y-2 flex-1'>
               <div>
                 <h1 className='text-5xl font-bold text-purple-200'>Archive NEET</h1>
                 <p className='text-sm text-muted-foreground mt-2'>
@@ -86,26 +97,24 @@ function App() {
         </section>
         <section className='h-full w-full mt-8 flex flex-col items-center justify-center'>
 
-          <Tabs defaultValue="account" className="w-[400px]">
+          <Tabs defaultValue="Projects" className="w-full">
             <TabsList className='w-full'>
-              <TabsTrigger value="Projects">Projects</TabsTrigger>
+              <TabsTrigger value="Projects" >Projects</TabsTrigger>
               <TabsTrigger value="Blog Posts">Blog Posts</TabsTrigger>
               <TabsTrigger value="Videos">Videos</TabsTrigger>
             </TabsList>
             <TabsContent value="Projects">
-              
+              Projects
             </TabsContent>
-            <TabsContent value="Blog Posts">
-              
-
+            <TabsContent value="Blog Posts" className="overflow-y-scroll">
             </TabsContent>
             <TabsContent value="Videos">
-              
-              
+              Videos
+
             </TabsContent>
           </Tabs>
         </section>
       </div>
     </main>
-  )
+  );
 }
