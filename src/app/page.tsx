@@ -1,29 +1,48 @@
 import Image from "next/image";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiSubstack } from "react-icons/si";
 import { FaYoutube } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
-import Favicon from "~/icon.svg"
+import Favicon from "~/icon.svg";
 import Link from "next/link";
+import { url } from "inspector";
+
 //github repos
-const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos')
-const repos = await githubRepo.json()
-console.log(repos)
+const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos');
+const repos = await githubRepo.json();
+console.log(repos);
 
 //substack posts
-const substackPosts = await fetch('https://api.substackapi.dev/posts/latest?publication_url=archiveneet.substack.com', {
-  headers: {
-    'X-API-Key': process.env.SUBSTACK_API_KEY,
-  }
-})
-const SubstackPosts = await substackPosts.json()
+interface SubstackPost {
+  title: string;
+  url: string;
+  publishedAt?: string;
+}
 
-console.log(SubstackPosts)
+const SubstackPosts: SubstackPost[] = [
+  {
+    title: "Coming soon!",
+    url: "https://archiveneet.substack.com/p/coming-soon",
+    publishedAt: "2024-01-01"
+  },
+];
 //youtube videos
-const youtubeVideos = await fetch('https://www.googleapis.com/youtube/v3/search?key=' + process.env.YOUTUBE_API_KEY + '&channelId=UC35viV3Agj-YLT15IPrrVFg&part=snippet,id&order=date&maxResults=20')
-const YoutubeVideos = await youtubeVideos.json()
-console.log(YoutubeVideos)
+interface Posts {
+  title: string;
+  url: string; // This should be the YouTube video ID
+  publishedAt: string;
+}
+
+const YoutubeVideos: Posts[] = [
+  {
+    title: "Hacks",
+    url: "dQw4w9WgXcQ", // Example YouTube Video ID
+    publishedAt: "2023-10-01T00:00:00Z",
+  }
+];
+console.log(YoutubeVideos);
+
 export default function page() {
   return (
     <main className='w-full h-full flex flex-col items-center px-4'>
@@ -43,13 +62,13 @@ export default function page() {
                 <a href='https://x.com/ArchiveNeet'>
                   <FaXTwitter className='hover:text-purple-300 transition-colors' />
                 </a>
-                <a href='https://substack.com/profile/posts'>
+                <a href='https://archiveneet.substack.com/'>
                   <SiSubstack className='hover:text-orange-300 transition-colors' />
                 </a>
                 <a href='https://github.com/ArchiveNeet'>
                   <FaGithub className='hover:text-purple-400 transition-colors' />
                 </a>
-                <a href='https://www.youtube.com/@ArchiveNeet'>
+                <a href='https://www.youtube.com/channel/UC35viV3Agj-YLT15IPrrVFg'>
                   <FaYoutube className='hover:text-red-300 transition-colors' />
                 </a>
               </div>
@@ -57,8 +76,6 @@ export default function page() {
               <p className='text-lg text-center leading-relaxed'>
                 Hello, the goal for this site is to allow me to jot down my thoughts, ideas, and show off projects that I am working on.
               </p>
-
-
             </div>
           </div>
 
@@ -80,13 +97,13 @@ export default function page() {
                 <a href='https://x.com/ArchiveNeet'>
                   <FaXTwitter className='hover:text-purple-300 transition-colors' />
                 </a>
-                <a href='https://substack.com/profile/posts'>
+                <a href='https://archiveneet.substack.com/'>
                   <SiSubstack className='hover:text-orange-300 transition-colors' />
                 </a>
                 <a href='https://github.com/ArchiveNeet'>
                   <FaGithub className='hover:text-purple-400 transition-colors' />
                 </a>
-                <a href='https://www.youtube.com/@ArchiveNeet'>
+                <a href='https://www.youtube.com/channel/UC35viV3Agj-YLT15IPrrVFg'>
                   <FaYoutube className='hover:text-red-300 transition-colors' />
                 </a>
               </div>
@@ -108,12 +125,11 @@ export default function page() {
             <TabsContent value="Projects">
               <div className='flex flex-col items-center gap-4 w-full justify-center'>
                 {repos.map((repo: any) => (
-                  <div key={repo.id} className='  rounded-lg hover:shadow-lg transition-shadow  '>
+                  <div key={repo.id} className='rounded-lg hover:shadow-lg transition-shadow'>
                     <Link href={repo.html_url}>
-                      <div className="flex flex-row gap-4 ">
+                      <div className="flex flex-row gap-4">
                         <p className='text-xs text-muted-foreground mt-2'>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
                         <div>
-
                           <h2 className='text-xl font-semibold text-purple-200'>{repo.name}</h2>
                           <p className='text-sm text-muted-foreground mt-2'>{repo.description}</p>
                         </div>
@@ -121,14 +137,63 @@ export default function page() {
                     </Link>
                   </div>
                 ))}
-                       
               </div>
             </TabsContent>
-            <TabsContent value="Blog Posts" className="overflow-y-scroll">
-            </TabsContent>
+<TabsContent value="Blog Posts">
+  <div className='flex flex-col items-center gap-4 w-full justify-center'>
+    {SubstackPosts.map((post: SubstackPost, index: number) => (
+      <div key={index} className='w-full max-w-3xl'>
+        <a href={post.url} target="_blank" rel="noopener noreferrer">
+          <div className="flex flex-col gap-4 p-6 rounded-lg border hover:shadow-lg transition-shadow cursor-pointer">
+            <div className="flex items-start gap-3">
+              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <SiSubstack className="text-white text-sm" />
+              </div>
+              <div className="flex-1">
+                <h2 className='text-xl font-semibold text-purple-200 mb-2'>{post.title}</h2>
+                {post.publishedAt && (
+                  <p className='text-xs text-muted-foreground'>
+                    Published: {new Date(post.publishedAt).toLocaleDateString()}
+                  </p>
+                )}
+                <div className="mt-3 text-sm text-purple-300 hover:text-purple-200 transition-colors">
+                  Read on Substack →
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    ))}
+  </div>
+</TabsContent>
             <TabsContent value="Videos">
-              Videos
+              <div className='flex flex-col items-center gap-6 w-full justify-center'>
+                {YoutubeVideos.map((video: any) => (
+                  <div key={video.url} className='w-full max-w-3xl'>
+                    <div className="flex flex-col gap-4 p-4 rounded-lg border ">
+                      {/* Video Title and Info */}
+                      <div className="flex flex-col gap-2">
+                        <h2 className='text-xl font-semibold text-purple-200'>{video.title}</h2>
+                        <p className='text-xs text-muted-foreground'>Published on: {new Date(video.publishedAt).toLocaleDateString()}</p>
+                      </div>
 
+                      {/* YouTube Embed */}
+                      <div className="relative w-full aspect-video">
+                        <iframe
+                          src={`https://www.youtube.com/embed/${video.url}`}
+                          title={video.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full rounded-lg"
+                        />
+                      </div>
+
+
+                    </div>
+                  </div>
+                ))}
+              </div>
             </TabsContent>
           </Tabs>
         </section>
