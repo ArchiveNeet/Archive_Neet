@@ -7,7 +7,6 @@ import { FaGithub } from "react-icons/fa";
 import Favicon from "~/icon.svg";
 import Link from "next/link";
 
-// Add this interface after your imports and before the fetch
 interface GitHubRepo {
   id: number;
   name: string;
@@ -25,7 +24,6 @@ interface GitHubRepo {
 const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos');
 const repos: GitHubRepo[] = await githubRepo.json();
 
-
 //substack posts
 interface SubstackPost {
   title: string;
@@ -40,6 +38,7 @@ const SubstackPosts: SubstackPost[] = [
     publishedAt: "2024-01-01"
   },
 ];
+
 //youtube videos
 interface Posts {
   title: string;
@@ -54,7 +53,6 @@ const YoutubeVideos: Posts[] = [
   //   publishedAt: "2023-10-01T00:00:00Z",
   // }
 ];
-// console.log(YoutubeVideos);
 
 export default function page() {
   return (
@@ -127,73 +125,94 @@ export default function page() {
             </div>
           </div>
         </section>
+        
         <section className='h-full w-full mt-8 flex flex-col items-center justify-center'>
-
           <Tabs defaultValue="Projects" className="w-full">
             <TabsList className='w-full'>
-              <TabsTrigger value="Projects" >Projects</TabsTrigger>
+              <TabsTrigger value="Projects">Projects</TabsTrigger>
               <TabsTrigger value="Blog Posts">Blog Posts</TabsTrigger>
               <TabsTrigger value="Videos">Videos</TabsTrigger>
             </TabsList>
-<TabsContent value="Projects">
-  <div className='flex flex-col items-center gap-4 w-full justify-center'>
-    {repos.map((repo: GitHubRepo) => (
-      <div key={repo.id} className=''>
-        <Link href={repo.html_url}>
-          <div className="flex flex-row gap-4">
-            <p className='text-xs text-muted-foreground mt-2'>
-              Last updated: {new Date(repo.updated_at).toLocaleDateString()}
-            </p>
-            <div>
-              <h2 className='text-xl font-semibold text-purple-200'>{repo.name}</h2>
-              <p className='text-sm text-muted-foreground mt-2'>
-                {repo.description || 'No description available'}
-              </p>
 
-            </div>
-          </div>
-        </Link>
-      </div>
-    ))}
-  </div>
-</TabsContent>
-<TabsContent value="Blog Posts">
-  <div className='flex flex-col items-center gap-4 w-full justify-center'>
-    {SubstackPosts.map((post: SubstackPost, index: number) => (
-      <div key={index} className='w-full max-w-3xl'>
-        <a href={post.url} target="_blank" rel="noopener noreferrer">
-          <div className="flex flex-col gap-4 p-6 rounded-lg border hover:shadow-lg transition-shadow cursor-pointer">
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
-                <SiSubstack className="text-white text-sm" />
+            <TabsContent value="Projects">
+              <div className='flex flex-col items-center gap-4 w-full justify-center'>
+                {repos.map((repo: GitHubRepo) => (
+                  <div key={repo.id} className='w-full max-w-3xl'>
+                    <Link href={repo.html_url}>
+                      <div className="flex flex-col gap-4 p-6 rounded-lg border hover:shadow-lg transition-shadow cursor-pointer">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <FaGithub className="text-white text-sm" />
+                          </div>
+                          <div className="flex-1">
+                            <h2 className='text-xl font-semibold text-purple-200 mb-2'>{repo.name}</h2>
+                            <p className='text-sm text-muted-foreground mb-3'>
+                              {repo.description || 'No description available'}
+                            </p>
+                            <div className="flex items-center justify-between">
+                              <p className='text-xs text-muted-foreground'>
+                                Last updated: {new Date(repo.updated_at).toLocaleDateString()}
+                              </p>
+                              <div className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+                                View on GitHub →
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
               </div>
-              <div className="flex-1">
-                <h2 className='text-xl font-semibold text-purple-200 mb-2'>{post.title}</h2>
-                {post.publishedAt && (
-                  <p className='text-xs text-muted-foreground'>
-                    Published: {new Date(post.publishedAt).toLocaleDateString()}
-                  </p>
-                )}
-                <div className="mt-3 text-sm text-purple-300 hover:text-purple-200 transition-colors">
-                  Read on Substack →
-                </div>
+            </TabsContent>
+
+            <TabsContent value="Blog Posts">
+              <div className='flex flex-col items-center gap-4 w-full justify-center'>
+                {SubstackPosts.map((post: SubstackPost, index: number) => (
+                  <div key={index} className='w-full max-w-3xl'>
+                    <a href={post.url} target="_blank" rel="noopener noreferrer">
+                      <div className="flex flex-col gap-4 p-6 rounded-lg border hover:shadow-lg transition-shadow cursor-pointer">
+                        <div className="flex items-start gap-3">
+                          <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <SiSubstack className="text-white text-sm" />
+                          </div>
+                          <div className="flex-1">
+                            <h2 className='text-xl font-semibold text-purple-200 mb-2'>{post.title}</h2>
+                            <div className="flex items-center justify-between">
+                              {post.publishedAt && (
+                                <p className='text-xs text-muted-foreground'>
+                                  Published: {new Date(post.publishedAt).toLocaleDateString()}
+                                </p>
+                              )}
+                              <div className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+                                Read on Substack →
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
               </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    ))}
-  </div>
-</TabsContent>
+            </TabsContent>
+
             <TabsContent value="Videos">
               <div className='flex flex-col items-center gap-6 w-full justify-center'>
-                {YoutubeVideos.map((video:Posts ) => (
+                {YoutubeVideos.map((video: Posts) => (
                   <div key={video.url} className='w-full max-w-3xl'>
-                    <div className="flex flex-col gap-4 p-4 rounded-lg border ">
+                    <div className="flex flex-col gap-4 p-6 rounded-lg border">
                       {/* Video Title and Info */}
-                      <div className="flex flex-col gap-2">
-                        <h2 className='text-xl font-semibold text-purple-200'>{video.title}</h2>
-                        <p className='text-xs text-muted-foreground'>Published on: {new Date(video.publishedAt).toLocaleDateString()}</p>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <FaYoutube className="text-white text-sm" />
+                        </div>
+                        <div className="flex-1">
+                          <h2 className='text-xl font-semibold text-purple-200 mb-2'>{video.title}</h2>
+                          <p className='text-xs text-muted-foreground mb-4'>
+                            Published: {new Date(video.publishedAt).toLocaleDateString()}
+                          </p>
+                        </div>
                       </div>
 
                       {/* YouTube Embed */}
@@ -206,8 +225,6 @@ export default function page() {
                           className="absolute inset-0 w-full h-full rounded-lg"
                         />
                       </div>
-
-
                     </div>
                   </div>
                 ))}
