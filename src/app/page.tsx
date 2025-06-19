@@ -6,12 +6,25 @@ import { FaYoutube } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import Favicon from "~/icon.svg";
 import Link from "next/link";
-import { url } from "inspector";
+
+// Add this interface after your imports and before the fetch
+interface GitHubRepo {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  updated_at: string;
+  created_at: string;
+  stargazers_count: number;
+  language: string | null;
+  fork: boolean;
+  private: boolean;
+}
 
 //github repos
 const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos');
-const repos = await githubRepo.json();
-console.log(repos);
+const repos: GitHubRepo[] = await githubRepo.json();
+
 
 //substack posts
 interface SubstackPost {
@@ -35,13 +48,13 @@ interface Posts {
 }
 
 const YoutubeVideos: Posts[] = [
-  {
-    title: "Hacks",
-    url: "dQw4w9WgXcQ", // Example YouTube Video ID
-    publishedAt: "2023-10-01T00:00:00Z",
-  }
+  // {
+  //   title: "Hacks",
+  //   url: "dQw4w9WgXcQ", // Example YouTube Video ID
+  //   publishedAt: "2023-10-01T00:00:00Z",
+  // }
 ];
-console.log(YoutubeVideos);
+// console.log(YoutubeVideos);
 
 export default function page() {
   return (
@@ -122,23 +135,28 @@ export default function page() {
               <TabsTrigger value="Blog Posts">Blog Posts</TabsTrigger>
               <TabsTrigger value="Videos">Videos</TabsTrigger>
             </TabsList>
-            <TabsContent value="Projects">
-              <div className='flex flex-col items-center gap-4 w-full justify-center'>
-                {repos.map((repo: any) => (
-                  <div key={repo.id} className='rounded-lg hover:shadow-lg transition-shadow'>
-                    <Link href={repo.html_url}>
-                      <div className="flex flex-row gap-4">
-                        <p className='text-xs text-muted-foreground mt-2'>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
-                        <div>
-                          <h2 className='text-xl font-semibold text-purple-200'>{repo.name}</h2>
-                          <p className='text-sm text-muted-foreground mt-2'>{repo.description}</p>
-                        </div>
-                      </div>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </TabsContent>
+<TabsContent value="Projects">
+  <div className='flex flex-col items-center gap-4 w-full justify-center'>
+    {repos.map((repo: GitHubRepo) => (
+      <div key={repo.id} className=''>
+        <Link href={repo.html_url}>
+          <div className="flex flex-row gap-4">
+            <p className='text-xs text-muted-foreground mt-2'>
+              Last updated: {new Date(repo.updated_at).toLocaleDateString()}
+            </p>
+            <div>
+              <h2 className='text-xl font-semibold text-purple-200'>{repo.name}</h2>
+              <p className='text-sm text-muted-foreground mt-2'>
+                {repo.description || 'No description available'}
+              </p>
+
+            </div>
+          </div>
+        </Link>
+      </div>
+    ))}
+  </div>
+</TabsContent>
 <TabsContent value="Blog Posts">
   <div className='flex flex-col items-center gap-4 w-full justify-center'>
     {SubstackPosts.map((post: SubstackPost, index: number) => (
@@ -169,7 +187,7 @@ export default function page() {
 </TabsContent>
             <TabsContent value="Videos">
               <div className='flex flex-col items-center gap-6 w-full justify-center'>
-                {YoutubeVideos.map((video: any) => (
+                {YoutubeVideos.map((video:Posts ) => (
                   <div key={video.url} className='w-full max-w-3xl'>
                     <div className="flex flex-col gap-4 p-4 rounded-lg border ">
                       {/* Video Title and Info */}
