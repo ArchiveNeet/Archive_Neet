@@ -5,9 +5,11 @@ import { SiSubstack } from "react-icons/si";
 import { FaYoutube } from "react-icons/fa6";
 import { FaGithub } from "react-icons/fa";
 import Favicon from "~/icon.svg"
+import Link from "next/link";
 //github repos
 const githubRepo = await fetch('https://api.github.com/users/ArchiveNeet/repos')
 const repos = await githubRepo.json()
+console.log(repos)
 
 //substack posts
 const substackPosts = await fetch('https://api.substackapi.dev/posts/latest?publication_url=archiveneet.substack.com', {
@@ -17,7 +19,7 @@ const substackPosts = await fetch('https://api.substackapi.dev/posts/latest?publ
 })
 const SubstackPosts = await substackPosts.json()
 
-
+console.log(SubstackPosts)
 //youtube videos
 const youtubeVideos = await fetch('https://www.googleapis.com/youtube/v3/search?key=' + process.env.YOUTUBE_API_KEY + '&channelId=UC35viV3Agj-YLT15IPrrVFg&part=snippet,id&order=date&maxResults=20')
 const YoutubeVideos = await youtubeVideos.json()
@@ -104,7 +106,23 @@ export default function page() {
               <TabsTrigger value="Videos">Videos</TabsTrigger>
             </TabsList>
             <TabsContent value="Projects">
-              Projects
+              <div className='flex flex-col items-center gap-4 w-full justify-center'>
+                {repos.map((repo: any) => (
+                  <div key={repo.id} className='  rounded-lg hover:shadow-lg transition-shadow  '>
+                    <Link href={repo.html_url}>
+                      <div className="flex flex-row gap-4 ">
+                        <p className='text-xs text-muted-foreground mt-2'>Last updated: {new Date(repo.updated_at).toLocaleDateString()}</p>
+                        <div>
+
+                          <h2 className='text-xl font-semibold text-purple-200'>{repo.name}</h2>
+                          <p className='text-sm text-muted-foreground mt-2'>{repo.description}</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+                       
+              </div>
             </TabsContent>
             <TabsContent value="Blog Posts" className="overflow-y-scroll">
             </TabsContent>
